@@ -33,7 +33,7 @@ public class MyUsernamePasswordAuthenticationFilter extends AbstractAuthenticati
     }
 
     @Override
-    public Authentication attemptAuthentication(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws AuthenticationException, IOException, ServletException {
+    public Authentication attemptAuthentication(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws AuthenticationException {
         if (!httpServletRequest.getMethod().equalsIgnoreCase("POST")) {
             throw new AuthenticationServiceException("Authentication method not supported: " + httpServletRequest.getMethod());
         }
@@ -86,7 +86,7 @@ public class MyUsernamePasswordAuthenticationFilter extends AbstractAuthenticati
     protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException, ServletException {
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         response.setContentType("application/json");
-        response.getWriter().write("{\"error\": \"" + failed.getMessage() + "\"}");
+        response.getWriter().write("{\"message\": \"" + failed.getMessage() + "\"}");
         response.getWriter().flush();
     }
 }

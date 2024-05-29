@@ -37,8 +37,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     @Autowired
     public JwtAuthenticationFilter(TokenUtils tokenUtils) {
         this.tokenUtils = tokenUtils;
-
-
     }
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {

@@ -51,7 +51,7 @@
     <appender name="REQUEST_TRACING_APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- daily rollover -->
-            <fileNamePattern>log_daily/assistant-trace-request.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <fileNamePattern>log_daily/instagram-trace-.%d{yyyy-MM-dd}.log</fileNamePattern>
             <maxHistory>10</maxHistory>
         </rollingPolicy>
         <encoder>

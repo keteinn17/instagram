@@ -16,8 +16,8 @@ import java.util.Date;
 @Setter
 @AllArgsConstructor
 public class JwtResponse implements Serializable {
-    private String user_id;
-    private String user_name;
+    private String userId;
+    private String username;
     private String email;
     private String role;
     private String token_type;

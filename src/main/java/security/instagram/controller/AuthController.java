@@ -2,25 +2,19 @@ package security.instagram.controller;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.json.JSONObject;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
-import security.instagram.config.token.JwtResponse;
-import security.instagram.dto.LoginRequest;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import security.instagram.dto.UserDto;
-import security.instagram.service.AuthenticationService;
 import security.instagram.service.UserServiceImpl;
 import security.instagram.utils.Constants;
-import security.instagram.utils.ForumMessage;
-import security.instagram.utils.Validate;
-import security.instagram.utils.exception.ForumException;
 import security.instagram.utils.exception.InvalidRequestException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -33,7 +27,6 @@ import java.util.Objects;
 @Slf4j
 public class AuthController {
     private final UserServiceImpl userServiceImpl;
-    private final AuthenticationService authenticationService;
     @PostMapping("/registry")
     public ResponseEntity<?> createUser(@RequestBody @Valid UserDto userDto) throws InvalidRequestException {
         log.info(Constants.SEPARATE);

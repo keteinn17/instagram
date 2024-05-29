@@ -16,7 +16,6 @@ import javax.validation.constraints.Email;
 @AllArgsConstructor
 @NoArgsConstructor
 public class LoginRequest {
-    @Email
     private String email;
     private String password;
 }

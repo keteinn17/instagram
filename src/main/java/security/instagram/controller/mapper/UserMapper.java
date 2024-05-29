@@ -18,7 +18,7 @@ public class UserMapper {
         //Optional<Role> role = roleRepository.findById(user.getRoleId());
         userDto.setRole(user.getRole());
         userDto.setEmail(user.getEmail());
-        userDto.setUsername(user.getUserName());
+        userDto.setUsername(user.getUsername());
         userDto.setFirstName(user.getFirstName());
         userDto.setLastName(user.getLastName());
 //        userDto.setGender(user.getGender());
@@ -29,10 +29,10 @@ public class UserMapper {
 //        UserAdditionalInfo userAdditionalInfo = user.getInfo();
         UserProfile userProfile = UserProfile.builder()
                 .email(user.getEmail())
-                .username(user.getUserName())
+                .username(user.getUsername())
                 .firstName(user.getFirstName())
                 .lastName(user.getLastName())
-                .dateOfBirth(user.getDateOfBirth())
+                .dateOfBirth(user.getDateOfBirth().toString())
 //                .gender(user.getGender())
 //                .accountType(user.getAccountType())
                 .avatarId(user.getAvatarId())

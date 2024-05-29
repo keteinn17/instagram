@@ -59,14 +59,12 @@ public class TokenUtilsImpl implements TokenUtils {
         Map<String, Object> additionalKeyValue = new HashMap<>();
         additionalKeyValue.put(Constants.USER_ID_CLAIMS_NAME, user.getUserID());
         additionalKeyValue.put(Constants.ROLE_CLAIMS_NAME, user.getRole());
-//        additionalKeyValue.put(Constants.ACCOUNT_TYPE_CLAIMS_NAME, user.getAccountType());
         long currentMillisecond = System.currentTimeMillis();
         int currentSecond = (int) (currentMillisecond / 1000);
         UUID accessTokenId = UUID.randomUUID();
         UUID refreshTokenId = UUID.randomUUID();
         Date accessTokenExpiration = new Date(currentMillisecond + jwtProperties.getAccessTokenValidity() * 1000);
         Date refreshTokenExpiration = new Date(currentMillisecond + jwtProperties.getRefreshTokenValidity() * 1000);
-        //Setup value for access token
         Claims claims = Jwts.claims();
         claims
                 .setId(accessTokenId.toString())

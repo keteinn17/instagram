@@ -29,19 +29,19 @@ public class MyUserDetailService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        User user = userRepository.findByEmail(email);
+        User user = userRepository.findByEmailOrUsername(email);
         if(Objects.isNull(user)){
             return null;
         }
 
         Collection<GrantedAuthority> authorities = AuthorityUtils.commaSeparatedStringToAuthorityList(String.valueOf(user.getRole()));
-        return new MyUserDetails(user.getId(), user.getRole(), user.getEmail(), user.getPassword(), user.isEnabled(),
+        return new MyUserDetails(user.getId(), user.getRole(), user.getEmail(), user.getUsername(), user.getPassword(), user.isEnabled(),
                 user.isAccountNonExpired(), user.isCredentialsNonExpired(), user.isAccountNonLocked(), authorities);
     }
 
     public UserDetails toMyUserDetailService(User user){
         Collection<GrantedAuthority> authorities = AuthorityUtils.commaSeparatedStringToAuthorityList(String.valueOf(user.getRole()));
-        return new MyUserDetails(user.getId(), user.getRole(), user.getEmail(), user.getPassword(), user.isEnabled(),
+        return new MyUserDetails(user.getId(), user.getRole(), user.getEmail(), user.getUsername(), user.getPassword(), user.isEnabled(),
                 user.isAccountNonExpired(), user.isCredentialsNonExpired(), user.isAccountNonLocked(), authorities);
     }
 }

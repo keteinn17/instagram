@@ -16,18 +16,20 @@ public class MyUserDetails extends User {
     private final Long userID;
     private final Role role;
     private final String email;
+    private final String username;
 
-    public MyUserDetails(Long userID, Role role, String email, String password, boolean enabled,
+    public MyUserDetails(Long userID, Role role, String email,String username, String password, boolean enabled,
                          boolean accountNonExpired, boolean credentialsNonExpired, boolean accountNonLocked,
                          Collection<? extends GrantedAuthority> authorities) {
         super(email, password, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authorities);
         this.email=email;
         this.userID = userID;
         this.role = role;
+        this.username = username;
     }
 
     @Override
     public String getUsername(){
-        return email;
+        return username;
     }
 }

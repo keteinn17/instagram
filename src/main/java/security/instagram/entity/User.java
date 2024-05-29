@@ -24,10 +24,10 @@ public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String userName;
+    private String username;
     private String firstName;
     private String lastName;
-    private String dateOfBirth;
+    private Date dateOfBirth;
     private String email;
     private String password;
     private Long avatarId;
@@ -42,7 +42,7 @@ public class User implements Serializable {
     private Date createAt;
     @UpdateTimestamp
     private Date modifyAt;
-    public String getUserName(){
-        return userName;
+    public String getUsername(){
+        return username;
     }
 }

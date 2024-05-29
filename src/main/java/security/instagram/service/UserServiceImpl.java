@@ -39,25 +39,24 @@ public class UserServiceImpl implements UserService {
     public UserDto createNewUser(UserDto request) {
         if (request.getEmail() == null
                 || request.getEmail().equals("")
-                || checkExistingEmail(request.getEmail())
+                || checkExistingEmail(request.getEmail(), request.getUsername())
         ) {
             throw new InvalidRequestException(LocalDateTime.now(), "ConstantMessages.INVALID_REQUEST",
                     String.format("ConstantMessages.INVALID_USERNAME", request.getUsername()), HttpStatus.BAD_REQUEST);
         }
         var user = User.builder()
-                .userName(request.getUsername())
+                .username(request.getUsername())
                 .firstName(request.getFirstName())
                 .lastName(request.getLastName())
-                .dateOfBirth(request.getDateOfBirth())
                 .email(request.getEmail())
-                .enabled(false)
+                .enabled(true)
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(Role.USER)
-//                .gender(request.getGender())
-//                .accountType(AccountType.UNKNOWN)
                 .build();
         User savedUser = userRepository.save(user);
         request.setUserId(savedUser.getId());
+        request.setPassword(null);
+        request.setConfirmPassword(null);
         return request;
     }
 
@@ -67,8 +66,8 @@ public class UserServiceImpl implements UserService {
         UserProfile userProfile = userMapper.showProfile(user.get());
         return userProfile;
     }
-    private boolean checkExistingEmail(String email) {
-        return userRepository.existsByEmail(email);
+    private boolean checkExistingEmail(String email, String username) {
+        return userRepository.existsByEmail(email) || userRepository.existsByUsername(username);
     }
     private static boolean isNull(Object o){
         return Objects.isNull(o);

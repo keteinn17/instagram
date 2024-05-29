@@ -12,8 +12,13 @@ import java.util.Optional;
  * @Date 5/27/2024
  */
 public interface UserRepository extends JpaRepository<User, Long> {
-    User findByEmail(String email);
+        @Query(value = "Select * " +
+            "From user u " +
+            "WHERE u.email = ?1 or u.username = ?1" ,
+            nativeQuery = true)
+    User findByEmailOrUsername(String email);
     boolean existsByEmail(String email);
+    boolean existsByUsername(String username);
     List<User> findAll();
     Optional<User> findById(Long id);
 //    @Query(value = "Select u.id,u.user_name, u.email,u.create_at" +
