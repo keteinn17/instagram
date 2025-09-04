@@ -16,6 +16,7 @@ import security.instagram.utils.exception.InvalidRequestException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.Objects;
+import java.util.logging.Logger;
 
 /**
  * @author ket_ein17
@@ -27,16 +28,17 @@ import java.util.Objects;
 @Slf4j
 public class AuthController {
     private final UserServiceImpl userServiceImpl;
+    private final Logger logger = Logger.getLogger(AuthController.class.getName());
     @PostMapping("/registry")
     public ResponseEntity<?> createUser(@RequestBody @Valid UserDto userDto) throws InvalidRequestException {
-        log.info(Constants.SEPARATE);
-        if(Objects.isNull(userDto.getDateOfBirth()) || userDto.getDateOfBirth().equals("")){
+        logger.info(Constants.SEPARATE);
+        if(Objects.isNull(userDto.getDateOfBirth()) || userDto.getDateOfBirth().isEmpty()){
             userDto.setDateOfBirth(null);
         }
         UserDto dto = userServiceImpl.createNewUser(userDto);
 
-        log.info("Registry success");
-        log.info(Constants.SEPARATE);
+        logger.info("Registry success");
+        logger.info(Constants.SEPARATE);
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 

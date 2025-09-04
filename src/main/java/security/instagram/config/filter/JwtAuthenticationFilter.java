@@ -71,7 +71,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         Optional<Integer> userId = Optional.ofNullable((Integer) claims.get(Constants.USER_ID_CLAIMS_NAME));
         Optional<String> email = Optional.ofNullable(claims.getSubject());
         Optional<String> role = Optional.ofNullable((String) claims.get(Constants.ROLE_CLAIMS_NAME));
-        Optional<String> accountType = (Optional.ofNullable( (String)claims.get(Constants.ACCOUNT_TYPE_CLAIMS_NAME)));
+//        Optional<String> accountType = (Optional.ofNullable( (String)claims.get(Constants.ACCOUNT_TYPE_CLAIMS_NAME)));
         BearerContext bearerContext = BearerContextHolder.getContext();
         bearerContext.setBearerToken(jwtToken);
         bearerContext.setUserId(String.valueOf(userId.orElseThrow(() ->
@@ -82,14 +82,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 new InvalidRequestException(LocalDateTime.now(), Constants.INVALID_TOKEN,
                         Constants.TOKEN_INVALID_USER_NAME, HttpStatus.UNAUTHORIZED))
         );
-        bearerContext.setRole(role.orElseThrow(() ->
-                new InvalidRequestException(LocalDateTime.now(), Constants.INVALID_TOKEN,
-                        Constants.TOKEN_INVALID_ROLE, HttpStatus.UNAUTHORIZED))
-        );
-        bearerContext.setAccountType(accountType.orElseThrow(() ->
-                new InvalidRequestException(LocalDateTime.now(), Constants.INVALID_TOKEN,
-                        Constants.TOKEN_INVALID_ROLE, HttpStatus.UNAUTHORIZED))
-        );
+        bearerContext.setRole(role.get());
+
+//        bearerContext.setAccountType(accountType.orElseThrow(() ->
+//                new InvalidRequestException(LocalDateTime.now(), Constants.INVALID_TOKEN,
+//                        Constants.TOKEN_INVALID_ROLE, HttpStatus.UNAUTHORIZED))
+//        );
         Collection<GrantedAuthority> authorities = AuthorityUtils.commaSeparatedStringToAuthorityList(role.get());
         UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(email.get(), null, authorities);
         SecurityContextHolder.getContext().setAuthentication(authToken);

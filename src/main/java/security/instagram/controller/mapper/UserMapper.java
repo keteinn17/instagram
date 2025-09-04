@@ -16,7 +16,6 @@ public class UserMapper {
         UserDto userDto = new UserDto();
         userDto.setUserId(user.getId());
         //Optional<Role> role = roleRepository.findById(user.getRoleId());
-        userDto.setRole(user.getRole());
         userDto.setEmail(user.getEmail());
         userDto.setUsername(user.getUsername());
         userDto.setFirstName(user.getFirstName());

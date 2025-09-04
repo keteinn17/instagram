@@ -16,5 +16,5 @@ public class BearerContext implements Serializable {
     private String userId;
     private String email;
     private String bearerToken;
-    private String accountType;
+//    private String accountType;
 }
