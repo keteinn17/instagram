@@ -2,9 +2,9 @@ spring:
   application:
     name: Instagram
   datasource:
-    url: jdbc:mysql://localhost:3306/instagram
-    username: admin
-    password: 123456
+    url: jdbc:mysql://root:nCzhbrEmfllZTuNfadnpSyIMjYZnANgb@nozomi.proxy.rlwy.net:39471/railway
+    username: root
+    password: nCzhbrEmfllZTuNfadnpSyIMjYZnANgb@
     driverClassName: com.mysql.jdbc.Driver
 #    hikari:
 #      poolName: "MyAppDataSourcePool"
