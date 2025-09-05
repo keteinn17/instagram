@@ -47,7 +47,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf(AbstractHttpConfigurer::disable)
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .addFilterBefore(customAuthFilter, UsernamePasswordAuthenticationFilter.class)
-//                .addFilterAfter(decentralizationFilter, JwtAuthenticationFilter.class)
+                //.addFilterAfter(decentralizationFilter, DecentralizationFilter.class)
                 .authorizeRequests()
                 .antMatchers("/swagger-ui/**","/api-docs/**","/v1/auth/**").permitAll()
                 .anyRequest().authenticated();
