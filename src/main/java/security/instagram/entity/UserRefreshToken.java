@@ -20,7 +20,9 @@ public class UserRefreshToken {
     private String email;
     private String refresh_token_id;
     @Basic(fetch = FetchType.LAZY)
-    private byte[] refresh_token;
+    @Lob
+        @Column(name = "refresh_token", columnDefinition = "BLOB")
+        private byte[] refresh_token;
     @Column(name = "access_token_id")
     private String ati;
     private Integer refresh_token_expiration;
