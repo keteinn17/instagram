@@ -48,4 +48,8 @@ public class DecentralizationService {
         repository.deleteById(id);
         // Optionally refresh cache if you use one
     }
+
+    public List<Decentralization> getAll() {
+        return repository.findAll();
+    }
 }
